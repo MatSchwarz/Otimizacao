@@ -5,10 +5,13 @@ from scipy import linalg
 
 def T(Q):
     T = np.linalg.inv((Q - np.identity(len(Q))))
-    return T
+    if scipy.linalg.issymmetric(T) == True:
+        return T
+    else:
+        raise Exception("A matriz T precisa ser simétrica")
 
 def b(T,q):
-    b = T@q
+    b = T.dot(q)
     return b
 
 def proj_ortante(x):
