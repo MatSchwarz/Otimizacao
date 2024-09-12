@@ -5,10 +5,10 @@ from scipy import linalg
 
 def T(Q):
     T = np.linalg.inv((Q - np.identity(len(Q))))
-    if scipy.linalg.issymmetric(T) == True:
+    if scipy.linalg.issymmetric(Q) == True:
         return T
     else:
-        raise Exception("A matriz T precisa ser simétrica")
+        raise Exception("A matriz Q precisa ser simétrica")
 
 def b(T,q):
     b = T.dot(q)
