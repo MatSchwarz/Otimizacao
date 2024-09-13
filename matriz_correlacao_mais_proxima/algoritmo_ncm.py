@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import scipy.stats
 from scipy import linalg
-from func_auxiliaresNCM import *
+from func_auxiliares_ncm import *
 
 #Função responsável por fazer uma iteração do algoritmo
 
@@ -10,6 +10,8 @@ def Df(X,G):
     Df = np.linalg.inv(Diag(diag(V(X))))@(e(X) - diag(V(X)@G_chapeu(G)))
     return Df
 
+
+#Algoritmo de Nearest Correlation Matrix
 def SM_ncm(X_input,G_input,iter,tol):
     i = 1
     X_inicial = X_input
