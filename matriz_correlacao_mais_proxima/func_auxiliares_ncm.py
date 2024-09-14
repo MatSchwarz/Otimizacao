@@ -28,7 +28,7 @@ def V(X):
     
     #Cria duas máscaras
     Dii_pos = Lambda > 0
-    Dii_neg = Lambda <= 0  
+    Dii_neg = Lambda <= 0 
 
     #faz a Matriz D
     Lambda[Dii_pos] = 1

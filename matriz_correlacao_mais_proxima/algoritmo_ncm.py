@@ -12,19 +12,19 @@ def Df(X,G):
 
 
 #Algoritmo de Nearest Correlation Matrix
-def SM_ncm(X_input,G_input,iter,tol):
+def sm_ncm(x_input,g_input,iter,tol):
     i = 1
-    X_inicial = X_input
-    X_proximo = Diag(Df(X_inicial,G_input)) + G_chapeu(G_input)
+    X_inicial = x_input
+    X_proximo = Diag(Df(X_inicial,g_input)) + G_chapeu(g_input)
 
     while i < iter:
         i = i+1 
         print("iteracao",i-1)
         print(V(X_proximo) @ X_proximo)
         X_inicial = X_proximo
-        X_proximo = Diag(Df(X_inicial,G_input)) + G_chapeu(G_input)
+        X_proximo = Diag(Df(X_inicial,g_input)) + G_chapeu(g_input)
 
-        if np.linalg.norm(np.diag(V(X_proximo) @ X_proximo) - e(X)) < tol:
+        if np.linalg.norm(np.diag(V(X_proximo) @ X_proximo) - e(X_proximo)) < tol:
             break
     
     return X_proximo, iter
