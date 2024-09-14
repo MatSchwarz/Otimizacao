@@ -25,6 +25,6 @@ def sm_ncm(x_input,g_input,iter,tol):
         X_proximo = Diag(diferencial_f(X_inicial,g_input)) + G_chapeu(g_input)
 
         if np.linalg.norm(np.diag(V(X_proximo) @ X_proximo) - e(X_proximo)) < tol:
-            break
-    
+            break      
+        
     return V(X_proximo) @ X_proximo, i
