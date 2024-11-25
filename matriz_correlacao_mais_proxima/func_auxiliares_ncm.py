@@ -1,34 +1,24 @@
 import numpy as np
 
-#Calcula o valor da derivada generalizada de Clarke
-def derivada_clarke(X):
+def derivada_clarke(X): #Calcula a derivada generalizada de Clarke para a matriz X.
+
+    eigv, u = np.linalg.eigh(X)  # Calcula os autovalores e autovetores de X
     
-    #Calcula os autovalores e autovetores
-    eigv, u = np.linalg.eigh(X)
+    Dii_pos = eigv > 0  # Devolve True autovalores positivos
+    Dii_neg = eigv <= 0  # Devolve False para autovalores não positivos
+
+    eigv[Dii_pos] = 1  # Modifica os valores True para 1
+    eigv[Dii_neg] = 0  # Modifica os valores False para 0
     
-    #Cria duas máscaras
-    Dii_pos = eigv > 0
-    Dii_neg = eigv <= 0 
+    D = np.diag(eigv)  # Cria a matriz diagonal D com 1's ou 0's
 
-    #faz a Matriz D
-    eigv[Dii_pos] = 1
-    eigv[Dii_neg] = 0
-    D = np.diag(eigv)
+    return u @ D @ u.T
 
-    #cria a V(X)
-    derivada_clarke = u@D@u.T
+def e(X): #Cria um vetor de uns com a mesma dimensão da diagonal principal de X.
 
-    return derivada_clarke
-
-#implementa um vetor de uns da mesma dimensão da diagonal da diagonal principal de X
-
-def e(X): 
-    diagonal = np.diag(X) 
-    e = np.ones(diagonal.shape)
-    return e
-
-#Implementa G sem diagonal principal
+    diagonal = np.diag(X)  # Extrai a diagonal principal de X
+    return np.ones(diagonal.shape)  # Retorna um vetor de uns com a mesma dimensão da diagonal
 
 def sem_diag_g(G):
-    sem_diag_g = G - np.diag(np.diag(G))
-    return sem_diag_g
+
+    return G - np.diag(np.diag(G))  # Subtrai a diagonal principal de G
